@@ -1,0 +1,342 @@
+html
+{
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+body {
+
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+
+
+}
+
+.size {
+    height: 200vh;
+    width: 200vw;
+}
+
+.main {
+    z-index: 1;
+    background-image: url(background.jpg);
+    /*image from freepik.com*/
+    background-size: 30%;
+   
+    background-repeat: repeat;
+
+
+
+}
+
+.board {
+    z-index: 3;
+    position: absolute;
+
+}
+
+
+.svgBoard {
+    z-index: 5;
+    pointer-events: none;
+    position: absolute;
+}
+
+.svgLineBoard{
+
+    z-index: 3;
+    pointer-events: none;
+    position: absolute;
+}
+
+
+
+g{
+    pointer-events:bounding-box;
+}
+
+g *{
+    pointer-events: none;
+}
+
+
+
+
+.default {
+    position: absolute;
+    min-height: 300px;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 0;
+}
+
+
+
+
+.ToolBtn{
+    width: 5vw;
+    height: 80%;
+    font-size: 1rem;
+    background-color: #446f887a;
+    color: white;
+     border: none;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    text-align: center;
+    overflow: hidden;
+    
+    
+}
+
+.PalleteBtn{
+    width: auto;
+    height: 80%;
+    aspect-ratio: 1/1;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    border: none;
+}
+
+.uiDefault
+{
+   background-color: #4654837a;
+
+}
+
+#uiDiv{
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent  ;
+    position: fixed;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    pointer-events: none;
+    z-index: 15;
+}
+
+#uiDiv *
+{
+    pointer-events: all;
+}
+
+#Toolbar {
+    margin-top: 1vh;
+    height: 7vh;    
+    grid-column: 2;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    z-index: 10;
+    grid-row:1 ;
+}
+
+#palletDiv
+{
+    width: 15vw;
+    height: 22vh;
+    grid-column: 3;
+  
+    margin-left: 1%;
+    z-index: 10;
+   
+    
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    scrollbar-color: rgb(77, 77, 77) rgba(77, 77, 77, 0.74);
+   
+
+}
+
+.colorBtn
+{
+    width: auto;
+    height: 5vh;
+    aspect-ratio: 1/1;
+    margin: 0.5vw;
+    border: none;
+}
+
+
+.SelectedToolBtn
+{
+    background-color: #33ac98;
+}
+
+
+
+
+.txtDiv {
+
+    background-color:rgb(204, 199, 153);
+    box-shadow: -10px 10px rgba(0, 0, 0, 0.342) ;
+
+}
+
+.txtTitle {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.txtText {
+    text-align: center;
+}
+
+.imgDiv {
+    top: 250px;
+    left: 500px;
+     background-color:rgb(204, 199, 153);
+
+}
+
+.imgImg {
+    background-color: white;
+    min-width: 150px;
+    min-height: 150px;
+    max-height: 400px;
+}
+
+.pinLarge
+{
+    
+    
+    r:30px;
+
+   
+}
+
+.pinSmall
+{
+   
+    r:20px;
+  
+}
+
+.pinShaft
+{
+    
+    r:20px;
+}
+
+.pinShadow
+{
+
+    fill: #00000055;
+    transform: rotate(-35deg); 
+    transform-box:fill-box; 
+    transform-origin:center;
+    rx : 35px; 
+    ry: 25px;
+}
+
+.line
+{
+    stroke-width: 7px;
+
+    pointer-events:all;
+    box-shadow: -10px 10px black;
+}
+
+
+#moreBtn
+{
+    grid-column: 1;
+    width: 3vw;
+    height: 3vw;
+    grid-row: 2;
+    margin-left: 1vh;
+    margin-bottom: 3vh;
+    border: none;
+    font-size:x-large;
+    color: white;
+    border-radius: 5px;
+    
+}
+
+#infoDiv
+{
+    grid-column-start: 1;
+    grid-column-end:4 ;
+    grid-row:1 ;
+     background-color: #465483b6;
+    height: 90vh;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    margin-top: 2vh;
+    z-index: 20;
+     font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: large;
+   
+}
+
+
+#infoDiv h2
+{
+    text-align: center;
+    font-size: xx-large;
+    text-decoration: underline;
+  
+    margin-top: 0;
+}
+
+#infoDiv h4
+{
+    font-size: larger;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+
+#infoDiv h5
+{
+    font-size: large;
+   margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#infoDiv p
+{
+    margin: 2px;
+    text-align: center;
+    font-size: medium;
+   
+}
+
+
+#infoDiv p > span
+{
+   font-weight: 600;
+   
+}
+
+
+#infoDiv hr{
+   width: 90%;
+   border: black 1px solid;
+}
+
+#infoDiv ul
+{
+    margin: 0;
+}
+
+#closeInfoBtn{
+    width: 2vw;
+    height: 2vw;
+    align-self: flex-end;
+    background: transparent;
+    border: none;
+    color:white;
+}
+

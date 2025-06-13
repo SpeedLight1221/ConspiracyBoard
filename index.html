@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="uiDiv">
+    
+    <div id="Toolbar" class="uiDefault">
+      <button class="ToolBtn SelectedToolBtn" id="btnNone" value="None">Click</button>
+      <button class="ToolBtn" id="btnTxt" value="Text">Text</button>
+      <button class="ToolBtn" id="btnImg" value="Img">Image</button>
+      <button class="ToolBtn" id="btnPin" value="Pin">Pin</button>
+      <button class="ToolBtn" id="btnStr" value="String">String</button>
+      <button class="ToolBtn" id="btnDel" value="Delete">Delete</button>
+      <button class="PalleteBtn" id="btnCol" ></button>
+    </div>
+    <div id="palletDiv"  class="uiDefault"  style="display: none;" >
+      <button class="colorBtn" value="#FF0000" style="background-color: #FF0000;"></button>
+      <button class="colorBtn" value="#008000" style="background-color: #008000;"></button>
+      <button class="colorBtn" value="#FFFF00" style="background-color: #FFFF00;"></button>
+      <button class="colorBtn" value="#0000FF" style="background-color: #0000FF;"></button>
+      <button class="colorBtn" value="#00FF00" style="background-color: #00FF00;"></button>
+      <button class="colorBtn" value="#87CEEB" style="background-color: #87CEEB;"></button>
+      <button class="colorBtn" value="#800080" style="background-color: #800080;"></button>
+      <button class="colorBtn" value="#008B8B" style="background-color: #008B8B;"></button>
+      <button class="colorBtn" value="#000000" style="background-color: #000000;"></button>
+      <button class="colorBtn" value="#FFFFFF" style="background-color: #FFFFFF;"></button>
+    </div>
+
+    <div id="infoDiv" class="uiDefault">
+      <button id="closeInfoBtn">X</button>
+      <h2>Speedlight1221's Crazy Conspiracy Board: Web page</h2>
+      <p style="color: white;">Welcome to Speedlight1221's Crazy Conspiracy Board: Web page! Made because deltarune chapters 3 & 4 came out and i needed to get my thought "in order". It could hvae been done in paint but i was too stubborn to do it that way. I hope you find it useful. </p>
+      <h4>Version 1.0</h4>
+      <h5>Added:</h5>
+      <p>Everything</p>
+      <h5>Removed:</h5>
+      <p>Herobrine</p>
+      <hr>
+      <p> Tools: </p>
+      <p><span>Click</span> - Default tool, use when editing content of textboxes or when moving the board</p>
+      <p><span>Text</span> - Creates a textbox.</p>
+      <p><span>Image</span> - Creates an image box. Drag and drop an image to display in on the board</p>
+      <p><span>Pin</span> - Creates a pin</p>
+      <p><span>String</span> - Connects two pins with a line</p>
+      <p><span>Delete</span> - Deletes object</p>
+      <p><span>Color</span> - Open the color menu. Chosen color affects pins and strings</p>
+      <p style="margin-top: 15px;">Everything is saved locally in your browser</p>
+      <p> if you have encounter any bugs or you have any suggestions feel free to contact me on reddit: <a href="https://www.reddit.com/user/SpeedLight1221/">u/SpeedLight1221</a></p>
+
+      <p style="margin: auto; margin-bottom: 0px; font-size: small;"> background image from freepik.com</p>
+    </div>
+
+    <button id="moreBtn" class="uiDefault">ⓘ</button>
+  </div>
+
+  <div class="main size">
+    <div class="board size" id="mainDiv">
+      <svg id="svgMain" class="svgBoard size">
+
+      </svg>
+      <svg id="svgLines" class="svgLineBoard size">
+
+      </svg>
+    </div>
+
+  </div>
+
+
+  <script type="module" src="board.js"></script>
+</body>
+
+</html>
