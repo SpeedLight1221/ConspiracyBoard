@@ -14,20 +14,25 @@ body {
 }
 
 .size {
-    height: 200vh;
-    width: 200vw;
+    height: 500vh;
+    width: 500vw;
+
 }
 
 .main {
     z-index: 1;
     background-image: url(background.jpg);
     /*image from freepik.com*/
-    background-size: 30%;
-   
+    background-size: 15%;
+  
     background-repeat: repeat;
 
 
 
+}
+
+#mainDiv{
+    overflow: hidden;
 }
 
 .board {

@@ -377,7 +377,7 @@ function loadPin(PosX,PosY,id,color)
 
     let small = document.createElementNS('http://www.w3.org/2000/svg',"circle");   
     small.classList.add("pinSmall");
-    small.style.fill = SelectedColor;
+    small.style.fill = color;
 
     let shadow = document.createElementNS('http://www.w3.org/2000/svg',"ellipse");   
     shadow.classList.add("pinShadow");
