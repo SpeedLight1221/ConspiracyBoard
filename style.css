@@ -82,20 +82,7 @@ g *{
 
 
 
-.ToolBtn{
-    width: 5vw;
-    height: 80%;
-    font-size: 1rem;
-    background-color: #446f887a;
-    color: white;
-     border: none;
-    margin-left: 0.5vw;
-    margin-right: 0.5vw;
-    text-align: center;
-    overflow: hidden;
-    
-    
-}
+
 
 .PalleteBtn{
     width: auto;
@@ -142,6 +129,28 @@ g *{
     grid-row:1 ;
 }
 
+.ToolBtn{
+    width: 5vw;
+    height: 80%;
+    font-size: 1rem;
+    background-color: #446f887a;
+    color: white;
+     border: none;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    text-align: center;
+    overflow: hidden;
+    
+    
+}
+
+.SelectedToolBtn
+{
+    background-color: #33ac98;
+}
+
+
+
 #palletDiv
 {
     width: 15vw;
@@ -170,13 +179,27 @@ g *{
 }
 
 
-.SelectedToolBtn
+
+
+
+.titleDiv
 {
-    background-color: #33ac98;
+    background-color: #00000000;
+    min-width: 0px;
+    min-height: 0px;
+    padding: 10px;
+    left: 500px;
+    top: 500px;
 }
 
 
-
+.titleText
+{
+    font-size: 4rem;
+    margin: 0;
+    font-weight: 800;
+    text-shadow:-5px 5px rgba(0, 0, 0, 0.342) ;
+}
 
 .txtDiv {
 
@@ -188,6 +211,7 @@ g *{
 .txtTitle {
     text-align: center;
     text-decoration: underline;
+  
 }
 
 .txtText {

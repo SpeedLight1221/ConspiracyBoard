@@ -1,4 +1,4 @@
-import { TextBox, ImageBox, Storage, Pin, StringObject } from "./storage.js";
+import { TextBox, ImageBox, Storage, Pin, StringObject, Title } from "./storage.js";
 import  * as TImg from "./images.js";
 
 
@@ -46,6 +46,7 @@ document.getElementById("btnImg").addEventListener("click", ToolSwap);
 document.getElementById("btnStr").addEventListener("click", ToolSwap);
 document.getElementById("btnDel").addEventListener("click", ToolSwap);
 document.getElementById("btnPin").addEventListener("click", ToolSwap);
+document.getElementById("btnTit").addEventListener("click", ToolSwap);
 
 
 
@@ -64,6 +65,10 @@ main.addEventListener("click",(e)=>{
             break;
         case "Img":
             createImageBox(e.x,e.y)
+            break;
+        case "Title":
+            console.log("titt");
+            createTitle(e.x,e.y);
             break;
         case "String":
             selectStringPoint(e);
@@ -150,6 +155,38 @@ function createImageBox(posX,posY)
     document.getElementById("btnNone").click();
 }
 
+
+function createTitle(posX,posY)
+{
+    posX+= window.scrollX;
+    posY+= window.scrollY;
+    let id =Storage.GetUniqueID();
+
+    let cont = document.createElement("div");
+        cont.classList.add("titleDiv");
+        cont.classList.add("default");
+        cont.id = "E_title_" + id;
+      
+        main.appendChild(cont);
+    let title = document.createElement("h2");
+        title.classList.add("titleText");
+        title.contentEditable = true;
+        title.innerText = "Title";
+        title.style.color = SelectedColor;
+        cont.appendChild(title);
+  
+
+    cont.style.top = posY+"px";
+    cont.style.left = posX+"px";
+
+    title.addEventListener("focusout",(e)=>{saveChanges(e,"title","title",id)});
+   
+
+    new Title(posX,posY,"Title",SelectedColor,id);
+
+    document.getElementById("btnNone").click();
+
+}
 
 let strX1 = null;
 let strY1 = null;
@@ -271,7 +308,7 @@ function ToolSwap(sender)
    
     SelectedTool =  sender.target.value;
 
-    let btns = document.getElementById("Toolbar").children
+    let btns = document.getElementById("Toolbar").children;
 
     for(let i =0; i< btns.length; i++)
     {
@@ -312,6 +349,11 @@ function LoadSave(e)
         let t =Storage.GlobalStorage.StringArray[i];
         loadString(t.PosX,t.PosY,t.EndX,t.EndY,t.ID,t.ColorHex);
     }
+    for(let i = 0; i< Storage.GlobalStorage.TitleArray.length;i++)
+    {
+        let t =Storage.GlobalStorage.TitleArray[i];
+        loadTitle(t.PosX,t.PosY,t.ID,t.Title,t.ColorHex);
+    }
 }
 
 function loadString(x1,y1,x2,y2,id,color)
@@ -328,6 +370,35 @@ function loadString(x1,y1,x2,y2,id,color)
     line.setAttribute("x2",x2);
     line.setAttribute("y2",y2);
    
+}
+
+function loadTitle(posX,posY,id,tit,color)
+{
+    
+
+    let cont = document.createElement("div");
+        cont.classList.add("titleDiv");
+        cont.classList.add("default");
+        cont.id = "E_title_" + id;
+      
+        main.appendChild(cont);
+    let title = document.createElement("h2");
+        title.classList.add("titleText");
+        title.innerText = tit;
+        title.contentEditable = true;
+        title.style.color = color;
+        cont.appendChild(title);
+  
+
+    cont.style.top = posY+"px";
+    cont.style.left = posX+"px";
+
+    title.addEventListener("focusout",(e)=>{saveChanges(e,"title","title",id)});
+   
+
+
+
+
 }
 
 function loadImagebox(posX,posY,id,tit,content)

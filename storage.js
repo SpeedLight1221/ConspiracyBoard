@@ -47,6 +47,35 @@ export class Storage {
 
             if (collision) { continue; }
 
+            for (let i = 0; i < Storage.GlobalStorage.StringArray.lenght; i++) {
+                if (Storage.GlobalStorage.StringArray[i].ID === id) {
+                    collision = true;
+                    break;
+                }
+            }
+
+            if (collision) { continue; }
+
+            for (let i = 0; i < Storage.GlobalStorage.PinArray.lenght; i++) {
+                if (Storage.GlobalStorage.PinArray[i].ID === id) {
+                    collision = true;
+                    break;
+                }
+            }
+
+
+
+            if (collision) { continue; }
+
+            for (let i = 0; i < Storage.GlobalStorage.TitleArray.lenght; i++) {
+                if (Storage.GlobalStorage.TitleArray[i].ID === id) {
+                    collision = true;
+                    break;
+                }
+            }
+
+            if (collision) { continue; }
+
             if (collision == false) {
                 break;
             }
@@ -79,7 +108,8 @@ export class Storage {
                 this.#globalstorage.ImageBoxArray = memory.ImageBoxArray;
                 this.#globalstorage.PinArray = memory.PinArray;
                 this.#globalstorage.StringArray = memory.StringArray;
-                
+                this.#globalstorage.TitleArray = memory.TitleArray;
+
             }
 
         }
@@ -92,22 +122,26 @@ export class Storage {
 
     StoreObject(toStore) {
         console.log(toStore);
-       
+
         switch (toStore.Type) {
             case "textbox":
-             
+
                 this.TextBoxArray.push(toStore);
                 break;
             case "imagebox":
-                
+
                 this.ImageBoxArray.push(toStore);
                 break;
             case "pin":
-                
+
                 this.PinArray.push(toStore);
-            break;
+                break;
             case "string":
                 this.StringArray.push(toStore);
+                break;
+
+            case "title":
+                this.TitleArray.push(toStore);
                 break;
             default:
                 return;
@@ -117,37 +151,41 @@ export class Storage {
 
     }
 
-    EditObject(type,id,toEdit,value)
-    {
-        if(type == "textbox")
-        {
+    EditObject(type, id, toEdit, value) {
+        if (type == "textbox") {
             let e = Storage.GlobalStorage.TextBoxArray.findIndex(txtbox => txtbox.ID == id);
-           
-            if(e <0){return;}
 
-            if(toEdit == "title")
-            {
+            if (e < 0) { return; }
+
+            if (toEdit == "title") {
                 Storage.GlobalStorage.TextBoxArray[e].Title = value;
             }
-            else if(toEdit == "content")
-            {
+            else if (toEdit == "content") {
                 Storage.GlobalStorage.TextBoxArray[e].Content = value;
             }
         }
-        else if(type == "imagebox")
-        {
+        else if (type == "imagebox") {
             let e = Storage.GlobalStorage.ImageBoxArray.findIndex(txtbox => txtbox.ID == id);
             console.log("sd");
-            if(e <0){return;}
+            if (e < 0) { return; }
 
-            if(toEdit == "title")
-            {
+            if (toEdit == "title") {
                 Storage.GlobalStorage.ImageBoxArray[e].Title = value;
             }
-            else if(toEdit == "content")
-            {
+            else if (toEdit == "content") {
                 Storage.GlobalStorage.ImageBoxArray[e].ImageData = value;
             }
+        }
+        else if(type == "title")
+        {
+            let e = Storage.GlobalStorage.TitleArray.findIndex(txtbox => txtbox.ID == id);
+            console.log("sd");
+            if (e < 0) { return; }
+
+            if (toEdit == "title") {
+                Storage.GlobalStorage.TitleArray[e].Title = value;
+            }
+           
         }
 
         localStorage.setItem("CBoardData", JSON.stringify(Storage.GlobalStorage));
@@ -157,29 +195,36 @@ export class Storage {
 
     DeleteObject(type, id) {
 
-        
+
         switch (type) {
             case "textbox": {
 
                 let e = Storage.GlobalStorage.TextBoxArray.findIndex(x => x.ID == id);
-                Storage.GlobalStorage.TextBoxArray.splice(e,1);
+                Storage.GlobalStorage.TextBoxArray.splice(e, 1);
 
             }
                 break;
-            case "imagebox":{
+            case "imagebox": {
                 let e = Storage.GlobalStorage.ImageBoxArray.findIndex(x => x.ID == id);
-                Storage.GlobalStorage.ImageBoxArray.splice(e,1);}
-                break;
-            case "pin":{
-                 let e = Storage.GlobalStorage.PinArray.findIndex(x => x.ID == id);
-                Storage.GlobalStorage.PinArray.splice(e,1);}
-               
-            break;
-            case "string" :{
-                let e = Storage.GlobalStorage.StringArray.findIndex(x=>x.ID == id);
-                Storage.GlobalStorage.StringArray.splice(e,1);
+                Storage.GlobalStorage.ImageBoxArray.splice(e, 1);
             }
-            break;
+                break;
+            case "pin": {
+                let e = Storage.GlobalStorage.PinArray.findIndex(x => x.ID == id);
+                Storage.GlobalStorage.PinArray.splice(e, 1);
+            }
+
+                break;
+            case "string": {
+                let e = Storage.GlobalStorage.StringArray.findIndex(x => x.ID == id);
+                Storage.GlobalStorage.StringArray.splice(e, 1);
+            }
+                break;
+            case "title": {
+                let e = Storage.GlobalStorage.TitleArray.findIndex(x => x.ID == id);
+                Storage.GlobalStorage.TitleArray.splice(e, 1);
+            }
+                break;
             default:
 
                 return;
@@ -191,8 +236,22 @@ export class Storage {
     TextBoxArray = [];
     ImageBoxArray = [];
     PinArray = [];
-    StringArray=[];
+    StringArray = [];
+    TitleArray = [];
 
+}
+
+export class Title extends baseObject {
+    constructor(x, y, title,color, id) {
+        super(x, y, "title", id)
+        this.Title = title;
+        this.ColorHex = color;
+        Storage.GlobalStorage.StoreObject(this);
+
+    }
+
+    Title;
+    ColorHex;
 }
 
 
@@ -227,11 +286,9 @@ export class ImageBox extends baseObject {
     ImageData;
 }
 
-export class Pin extends baseObject
-{
-    constructor(x,y,color,id)
-    {
-        super(x,y,"pin",id);
+export class Pin extends baseObject {
+    constructor(x, y, color, id) {
+        super(x, y, "pin", id);
         this.ColorHex = color;
         Storage.GlobalStorage.StoreObject(this);
     }
@@ -239,46 +296,40 @@ export class Pin extends baseObject
     ColorHex;
 
 
-    static getPallete(HexColor) 
-    {
-        let RGB = [HexColor.substring(1,3),HexColor.substring(3,5),HexColor.substring(5,7)];
+    static getPallete(HexColor) {
+        let RGB = [HexColor.substring(1, 3), HexColor.substring(3, 5), HexColor.substring(5, 7)];
         console.log(RGB);
         let val1 = [];
         let val2 = [];
 
-        for(let i =0;i <3;i++)
-        {
-            let numb = Number("0x"+RGB[i]);
-            let B = Math.round((numb/100)*70).toString(16);
-            if(B.length == 1)
-            {
-                B = "0"+B;
+        for (let i = 0; i < 3; i++) {
+            let numb = Number("0x" + RGB[i]);
+            let B = Math.round((numb / 100) * 70).toString(16);
+            if (B.length == 1) {
+                B = "0" + B;
             }
             val1[i] = B;
 
-            let D = Math.round((numb/100)*50).toString(16);
-           
-            if(D.length ==1)
-            {
-                D = "0"+D;
+            let D = Math.round((numb / 100) * 50).toString(16);
+
+            if (D.length == 1) {
+                D = "0" + D;
             }
             val2[i] = D;
-          
+
         }
 
-        let bodyColor = "#"+val1[0]+val1[1]+val1[2];
-        let shaftColor = "#"+val2[0]+val2[1]+val2[2];
+        let bodyColor = "#" + val1[0] + val1[1] + val1[2];
+        let shaftColor = "#" + val2[0] + val2[1] + val2[2];
         console.log(bodyColor);
         console.log(shaftColor);
-        return [bodyColor,shaftColor];
+        return [bodyColor, shaftColor];
     }
 }
 
-export class StringObject extends baseObject
-{
-    constructor(x,y,color,endX,endY,id)
-    {
-        super(x,y,"string",id);
+export class StringObject extends baseObject {
+    constructor(x, y, color, endX, endY, id) {
+        super(x, y, "string", id);
         this.ColorHex = color;
         this.EndX = endX;
         this.EndY = endY;
