@@ -109,6 +109,7 @@ export class Storage {
                 this.#globalstorage.PinArray = memory.PinArray;
                 this.#globalstorage.StringArray = memory.StringArray;
                 this.#globalstorage.TitleArray = memory.TitleArray;
+                this.CheckNulls();
 
             }
 
