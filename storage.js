@@ -117,6 +117,34 @@ export class Storage {
         return Storage.#globalstorage;
     }
 
+    static CheckNulls()
+    {
+        if(this.#globalstorage.TextBoxArray == null || undefined)
+        {
+            this.#globalstorage.TextBoxArray = [];
+        }
+
+        if(this.#globalstorage.ImageBoxArray == null || undefined)
+        {
+            this.#globalstorage.ImageBoxArray = [];
+        }
+
+        if(this.#globalstorage.PinArray == null || undefined)
+        {
+            this.#globalstorage.PinArray = [];
+        }
+
+        if(this.#globalstorage.StringArray == null || undefined)
+        {
+            this.#globalstorage.StringArray = [];
+        }
+
+        if(this.#globalstorage.TitleArray == null || undefined)
+        {
+            this.#globalstorage.TitleArray = [];
+        }
+    }
+
     static #globalstorage;
 
 

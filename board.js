@@ -325,7 +325,7 @@ function ToolSwap(sender)
 
 function LoadSave(e)
 {
-   
+    
 
     for(let i = 0; i< Storage.GlobalStorage.TextBoxArray.length;i++)
     {
