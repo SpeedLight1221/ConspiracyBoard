@@ -1,6 +1,6 @@
 let turn = 0;
 let tiredness = 0;
-let pirTrack = 1;
+let pirTrack = 0;
 
 
 
