@@ -23,10 +23,7 @@ function hypnoClick() {
 function pirClick() {
    
     tiredness += 0.5;
-    pirTrack++;
-    if(pirTrack > 9){
-        pirTrack=1;
-    }
+    
     NextTurn();
 
 }
@@ -36,6 +33,10 @@ function othClick() {
 }
 
 function NextTurn() {
+    pirTrack++;
+    if(pirTrack > 9){
+        pirTrack=1;
+    }
     turn++;
     TurnNum.innerText = " " + turn;
     TireNum.innerText = " " + tiredness + "/9"
