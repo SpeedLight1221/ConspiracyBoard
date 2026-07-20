@@ -195,21 +195,28 @@ function selectStringPoint(ev)
     let tID = ev.target.id.split('_');
     if(tID[1]== "pin")
     {
-        let obj = ev.target.getElementsByClassName("pinLarge")[0];
-       
+        
+        let obj = ev.target.parentElement;
+        let stl = window.getComputedStyle(obj);
+        let res = stl.getPropertyValue("transform");
+
+        let values = res.match(/-?\d*\.?\d+/g);
+        console.log(values);
+
     
         if(strX1 == null)
         {
-            strX1 = obj.style.cx;
-            strY1 = obj.style.cy;
+            strX1 = values[4];
+            strY1 = values[5];
             return;
+   
         }
         else
         {
-            createString(strX1,strY1,obj.style.cx,obj.style.cy);
+            createString(strX1,strY1,values[4],values[5]);
             strX1 = null;
             strY1 = null;
-             document.getElementById("btnNone").click();
+            document.getElementById("btnNone").click();
         }
 
     }
@@ -249,8 +256,12 @@ function createPin(PosX,PosY)
    
     let group = document.createElementNS('http://www.w3.org/2000/svg',"g");
     group.style.zIndex = 5;
+    let rect = document.createElementNS('http://www.w3.org/2000/svg',"rect");
+    rect.classList.add("pinRect");
+    rect.style.fill = "transparent";
+    rect.id = "E_pin_"+id;
     let darkenedColors = Pin.getPallete(SelectedColor);
-    group.id = "E_pin_"+id;
+   
     let large = document.createElementNS('http://www.w3.org/2000/svg',"circle");
     large.classList.add("pinLarge");
     large.style.fill = darkenedColors[0];
@@ -266,21 +277,23 @@ function createPin(PosX,PosY)
     let shadow = document.createElementNS('http://www.w3.org/2000/svg',"ellipse");   
     shadow.classList.add("pinShadow");
     
-    large.style.cy = PosY;
-    large.style.cx = PosX;
-    small.style.cy = PosY-15;
-    small.style.cx = PosX+15;
-    shaft.style.cy = PosY-5;
-    shaft.style.cx = PosX +5;
-    shadow.style.cy = PosY+15;
-    shadow.style.cx = PosX-20;
+    group.setAttribute("transform", `translate(${PosX},${PosY})`);
+    large.style.cy = "0px";
+    large.style.cx = "0px";
+    small.style.cy = "-15px";
+    small.style.cx = "15px";
+    shaft.style.cy = "-5px";
+    shaft.style.cx = "5px";
+    shadow.style.cy = "15px";
+    shadow.style.cx = "-20px";
 
     svgMain.appendChild(group);
+
     group.appendChild(shadow);
     group.appendChild(large);
     group.appendChild(shaft);
     group.appendChild(small);
-
+    group.appendChild(rect);
     new Pin(PosX,PosY,SelectedColor,id);
    
 }
@@ -296,7 +309,13 @@ function DeleteTool(ev)
         let id = idData[2];
         let type = idData[1];
         Storage.GlobalStorage.DeleteObject(type,id);
-        ev.target.remove();
+        if(type == "pin"){
+            ev.target.parentElement.remove();
+        }
+        else{
+            ev.target.remove();
+        }
+  
     }
 }
 
@@ -436,8 +455,12 @@ function loadPin(PosX,PosY,id,color)
    
     let group = document.createElementNS('http://www.w3.org/2000/svg',"g");
     group.style.zIndex = 5;
-   
-    group.id = "E_pin_"+id;
+    
+    let rect = document.createElementNS('http://www.w3.org/2000/svg',"rect");
+    rect.classList.add("pinRect");
+   rect.style.fill = "transparent";
+    rect.id = "E_pin_"+id;
+
     let large = document.createElementNS('http://www.w3.org/2000/svg',"circle");
     large.classList.add("pinLarge");
     large.style.fill = darkenedColors[0];
@@ -453,20 +476,24 @@ function loadPin(PosX,PosY,id,color)
     let shadow = document.createElementNS('http://www.w3.org/2000/svg',"ellipse");   
     shadow.classList.add("pinShadow");
     
-    large.style.cy = PosY;
-    large.style.cx = PosX;
-    small.style.cy = PosY-15;
-    small.style.cx = PosX+15;
-    shaft.style.cy = PosY-5;
-    shaft.style.cx = PosX +5;
-    shadow.style.cy = PosY+15;
-    shadow.style.cx = PosX-20;
+    group.setAttribute("transform", `translate(${PosX},${PosY})`);
+    large.style.cy = "0px";
+    large.style.cx = "0px";
+    small.style.cy = "-15px";
+    small.style.cx = "15px";
+    shaft.style.cy = "-5px";
+    shaft.style.cx = "5px";
+    shadow.style.cy = "15px";
+    shadow.style.cx = "-20px";
+
 
     svgMain.appendChild(group);
+   
     group.appendChild(shadow);
     group.appendChild(large);
     group.appendChild(shaft);
     group.appendChild(small);
+    group.appendChild(rect);
 
    
    

@@ -104,7 +104,7 @@ export function OnFileDrop(ev)
                 if(type == "png" || "jpg" || "jpeg" || "gif" || "webp")
                 {
                    
-                    setImage(file,ev.toElement)
+                    setImage(file,ev.target);
               
                    break;
                 }
